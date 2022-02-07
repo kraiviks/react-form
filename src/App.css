@@ -2,6 +2,8 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	height: 100vh;
+	width: 100vw;
 }
 
 .inputs_wrapp {
@@ -19,6 +21,11 @@
 	color: red;
 }
 
-.nav-link {
+.nav-link,
+label {
 	user-select: none;
+}
+
+label {
+	cursor: pointer;
 }
