@@ -1,1 +1,1 @@
-[Form](https://kraiviks.github.io/react-form/).
+[TЗ](https://kraiviks.github.io/react-form/)
