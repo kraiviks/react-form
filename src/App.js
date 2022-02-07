@@ -21,11 +21,18 @@ function App() {
 	const [phoneError, setPhoneError] = useState("");
 	const [activeTab, setActiveTab] = useState("1");
 	const [message, setMessage] = useState("");
+	const [formD, setFormD] = useState([]);
 	const getFormsData = (e) => {
 		e.preventDefault();
 
 		const data = new FormData(e.target);
+		const dataArr = [];
 		setMessage("Данные формы сохранены в formData");
+
+		for (const key of data.entries()) {
+			dataArr.push(`${key[0]} : ${key[1]}`);
+		}
+		setFormD(dataArr);
 	};
 
 	const trySubmitFile = (e) => {
@@ -34,6 +41,7 @@ function App() {
 			e.preventDefault();
 		}
 	};
+
 	return (
 		<div className="App">
 			<Form
@@ -47,7 +55,6 @@ function App() {
 						<NavItem>
 							<NavLink
 								className={activeTab === "1" ? "active" : ""}
-								onClick={() => setActiveTab("1")}
 							>
 								Основная информация
 							</NavLink>
@@ -55,7 +62,6 @@ function App() {
 						<NavItem>
 							<NavLink
 								className={activeTab === "2" ? "active" : ""}
-								onClick={() => setActiveTab("2")}
 							>
 								Контактная информация{" "}
 							</NavLink>
@@ -63,7 +69,6 @@ function App() {
 						<NavItem>
 							<NavLink
 								className={activeTab === "3" ? "active" : ""}
-								onClick={() => setActiveTab("3")}
 							>
 								Фотография
 							</NavLink>
@@ -71,7 +76,6 @@ function App() {
 						<NavItem>
 							<NavLink
 								className={activeTab === "4" ? "active" : ""}
-								onClick={() => setActiveTab("4")}
 							>
 								Публикация{" "}
 							</NavLink>
@@ -182,11 +186,11 @@ function App() {
 						<TabPane tabId="3">
 							<Row>
 								<Col sm="12" className="inputs_wrapp">
-									<label htmlFor="image1">
+									<label htmlFor="photo">
 										Photos: выберите до 5 фото
 										<Input
-											id="image1"
-											name="image1"
+											id="photo"
+											name="photo"
 											type="file"
 											accept="image/png, image/jpeg"
 											multiple
@@ -267,6 +271,13 @@ function App() {
 										</Button>
 									</div>
 									<div className="message-box">{message}</div>
+									<ul>
+										{formD
+											? formD.map((item, index) => (
+													<li key={index}>{item}</li>
+											  ))
+											: null}
+									</ul>
 								</Col>
 							</Row>
 						</TabPane>

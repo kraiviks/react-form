@@ -18,3 +18,7 @@
 .error {
 	color: red;
 }
+
+.nav-link {
+	user-select: none;
+}
