@@ -1,6 +1,5 @@
 import { useState } from "react";
 import "./App.css";
-import classnames from "classnames";
 import {
 	TabContent,
 	TabPane,
@@ -47,7 +46,6 @@ function App() {
 	return (
 		<div className="App">
 			<Form
-				id="form"
 				encType="multipart/form-data"
 				method="post"
 				onSubmit={getFormsData}
