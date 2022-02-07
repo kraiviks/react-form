@@ -22,18 +22,12 @@ function App() {
 	const [activeTab, setActiveTab] = useState("1");
 	const [message, setMessage] = useState("");
 	const getFormsData = (e) => {
-		const form = document.querySelector("#form");
-
 		e.preventDefault();
-		const data = new FormData(form);
-		setMessage("Данные формы сохранены в formData");
 
-		setTimeout(() => {
-			for (const key of data.entries()) {
-				console.log(key);
-			}
-		}, 1500);
+		const data = new FormData(e.target);
+		setMessage("Данные формы сохранены в formData");
 	};
+
 	const trySubmitFile = (e) => {
 		if (e.target.files.length > 5) {
 			alert("Only 5 files accepted.");
