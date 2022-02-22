@@ -72,6 +72,13 @@ function App() {
 		}
 	};
 
+	const checkPhone = () => {
+		if (phone !== "") {
+			setActiveTab("3");
+		}
+		setPhoneError("Поле должно быть заполнено!");
+	};
+
 	const listGroupItem = ({ title, name }) => {
 		return (
 			<ListGroupItem key={name}>
@@ -140,9 +147,9 @@ function App() {
 											invalid={
 												phone !== "" ? false : true
 											}
-											onChange={(e) => {
-												setPhone(e.target.value);
-											}}
+											onChange={(e) =>
+												setPhone(e.target.value)
+											}
 										/>
 										<div className="error">
 											{phone === "" ? phoneError : ""}
@@ -165,14 +172,7 @@ function App() {
 										</Button>
 										<Button
 											color="primary"
-											onClick={() => {
-												if (phone !== "") {
-													setActiveTab("3");
-												}
-												setPhoneError(
-													"Поле должно быть заполнено!"
-												);
-											}}
+											onClick={checkPhone}
 										>
 											Next step
 										</Button>
@@ -218,7 +218,7 @@ function App() {
 								<Col sm="12" className="inputs_wrapp mt-5">
 									<ListGroup>
 										{listGroup
-											? listGroup.map((item, index) =>
+											? listGroup.map((item) =>
 													listGroupItem(item)
 											  )
 											: null}
