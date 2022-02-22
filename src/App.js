@@ -39,7 +39,7 @@ const listGroup = [
 	},
 ];
 
-function App() {
+const App = () => {
 	const [header, setHeader] = useState("");
 	const [phone, setPhone] = useState("");
 	const [headerError, setHeaderError] = useState("");
@@ -252,6 +252,6 @@ function App() {
 			</Form>
 		</div>
 	);
-}
+};
 
 export default App;
