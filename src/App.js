@@ -14,6 +14,30 @@ import {
 	ListGroup,
 	ListGroupItem,
 } from "reactstrap";
+import Tab from "./components/Tab/Tab";
+
+const listGroup = [
+	{
+		title: "paid services 1",
+		name: "service1",
+	},
+	{
+		title: "paid services 2",
+		name: "service2",
+	},
+	{
+		title: "paid services 3",
+		name: "service3",
+	},
+	{
+		title: "paid services 4",
+		name: "service4",
+	},
+	{
+		title: "paid services 5",
+		name: "service5",
+	},
+];
 
 function App() {
 	const [header, setHeader] = useState("");
@@ -30,17 +54,31 @@ function App() {
 		const dataArr = [];
 		setMessage("Данные формы сохранены в formData");
 
-		for (const key of data.entries()) {
-			dataArr.push(`${key[0]} : ${key[1]}`);
+		for (const [key, value] of data.entries()) {
+			dataArr.push(`${key} : ${value}`);
 		}
+
+		// for (const key of data.entries()) {
+		// 	dataArr.push( const {end, } = data.entries());
+		// }
 		setFormD(dataArr);
 	};
 
 	const trySubmitFile = (e) => {
+		//const { files } = e.target;
 		if (e.target.files.length > 5) {
 			alert("Only 5 files accepted.");
 			e.preventDefault();
 		}
+	};
+
+	const listGroupItem = ({ title, name }) => {
+		return (
+			<ListGroupItem key={name}>
+				<label htmlFor={name}>{title}</label>
+				<Input id={name} name={name} type="checkbox" />
+			</ListGroupItem>
+		);
 	};
 
 	return (
@@ -82,63 +120,13 @@ function App() {
 						</NavItem>
 					</Nav>
 					<TabContent activeTab={activeTab}>
-						<TabPane tabId="1">
-							<Row>
-								<Col sm="12" className="inputs_wrapp mt-5">
-									<label htmlFor="inputHeader">
-										Заголовок:
-										<Input
-											id="inputHeader"
-											name="header"
-											placeholder="Header"
-											type="text"
-											required
-											invalid={
-												header !== "" ? false : true
-											}
-											onChange={(e) => {
-												setHeader(e.target.value);
-											}}
-										/>
-										<div className="error">
-											{header === "" ? headerError : ""}
-										</div>
-									</label>
-									<label htmlFor="inputTextarea">
-										Описание:
-										<Input
-											id="inputTextarea"
-											name="textarea"
-											type="textarea"
-										/>
-									</label>
-									<label
-										htmlFor="status"
-										className="mt-3 mb-3"
-									>
-										Статус: on|off
-										<Input
-											id="status"
-											name="status"
-											type="checkbox"
-										/>
-									</label>
-									<Button
-										color="primary"
-										onClick={() => {
-											if (header !== "") {
-												setActiveTab("2");
-											}
-											setHeaderError(
-												"Поле должно быть заполнено!"
-											);
-										}}
-									>
-										Next step
-									</Button>
-								</Col>
-							</Row>
-						</TabPane>
+						<Tab
+							header={header}
+							headerError={headerError}
+							setHeader={setHeader}
+							setActiveTab={setActiveTab}
+							setHeaderError={setHeaderError}
+						/>
 						<TabPane tabId="2">
 							<Row>
 								<Col sm="12" className="inputs_wrapp mt-5">
@@ -229,58 +217,12 @@ function App() {
 							<Row>
 								<Col sm="12" className="inputs_wrapp mt-5">
 									<ListGroup>
-										<ListGroupItem>
-											<label htmlFor="services1">
-												Paid services 1:
-											</label>
-											<Input
-												id="services1"
-												name="services1"
-												type="checkbox"
-											/>
-										</ListGroupItem>
-										<ListGroupItem>
-											<label htmlFor="services2">
-												Paid services 2:
-											</label>
-											<Input
-												id="services2"
-												name="services2"
-												type="checkbox"
-											/>
-										</ListGroupItem>
-										<ListGroupItem>
-											<label htmlFor="services3">
-												Paid services 3:
-											</label>
-											<Input
-												id="services3"
-												name="services3"
-												type="checkbox"
-											/>
-										</ListGroupItem>
-										<ListGroupItem>
-											<label htmlFor="services4">
-												Paid services 4:
-											</label>
-											<Input
-												id="services4"
-												name="services4"
-												type="checkbox"
-											/>
-										</ListGroupItem>
-										<ListGroupItem>
-											<label htmlFor="services5">
-												Paid services 5:
-											</label>
-											<Input
-												id="services5"
-												name="services5"
-												type="checkbox"
-											/>
-										</ListGroupItem>
+										{listGroup
+											? listGroup.map((item, index) =>
+													listGroupItem(item)
+											  )
+											: null}
 									</ListGroup>
-
 									<div className="buttons">
 										<Button
 											color="primary"
